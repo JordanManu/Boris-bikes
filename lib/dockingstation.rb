@@ -2,16 +2,17 @@
 # require 'byebug'
 
 class DockingStation
-  attr_reader :bikes
+  attr_reader :bikes, :capacity
   DEFAULT_CAPACITY = 20
 
-  def initialize
+  def initialize(capacity = 50)
     @bikes = []
+    @capacity = DEFAULT_CAPACITY
   end
 
   def release_bike
     fail "There are no bikes available" if empty?
-    return Bike.new if @bikes.count >= 1
+    @bikes.pop
   end
 
   def dock(bike)
@@ -26,7 +27,7 @@ class DockingStation
     @bikes.count >= DEFAULT_CAPACITY
   end
   def empty?
-    @bikes.count == 0
+    @bikes.empty?
   end
 end
 
