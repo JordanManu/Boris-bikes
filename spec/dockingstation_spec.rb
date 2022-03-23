@@ -19,17 +19,16 @@ describe DockingStation do
   #   expect(docking_station.dock(:bike)).to eq :bike
   # end
   it "raises an error if there are no bikes to release" do
-    allow(docking_station).to receive(:release_bike).and_return nil
     expect { raise "There are no bikes available" }.to raise_error("There are no bikes available")
   end
   it "raises an error if user tries to dock a bike while docking station is full" do
-    allow(docking_station).to receive(:dock).and_return 1
-    expect { raise "Docking station full'" }.to raise_error("Docking station full'")
+    expect { raise "Docking station full" }.to raise_error("Docking station full")
   end
   it "allows the user to dock a bike" do
     expect(docking_station.dock(:bike)).to eq "Bike has been docked"
   end
   # it "stores up to 20 bikes in the docking station" do
-  #   expect(docking_station.dock(Bike.new)).to receive(:dock)eq "The docking station is now full with 20 bikes"
+  #   allow(docking_station).to receive(:full?).and_return true
+  #   expect(docking_station.dock(Bike.new)).to raise_error("Docking station full")
   # end
 end

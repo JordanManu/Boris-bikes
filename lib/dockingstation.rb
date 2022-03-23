@@ -1,29 +1,29 @@
-require './bike.rb'
-require 'byebug'
+# require './bike.rb'
+# require 'byebug'
 
 class DockingStation
   attr_reader :bikes
+  DEFAULT_CAPACITY = 20
 
   def initialize
     @bikes = []
-    @max_capacity = 20
   end
 
   def release_bike
-    return "There are no bikes available" if empty?
+    fail "There are no bikes available" if empty?
     return Bike.new if @bikes.count >= 1
   end
 
   def dock(bike)
     fail 'Docking station full' if full?
-    "Bike has been docked" if !full?
     @bikes << bike
+    return "Bike has been docked" if !full?
   end
 
   private
 
   def full?
-    @bikes.count >= 20
+    @bikes.count >= DEFAULT_CAPACITY
   end
   def empty?
     @bikes.count == 0
